@@ -2,7 +2,12 @@ class User < ActiveRecord::Base
 
   has_many :microposts
 
-  attr_accessible :name , :email
+  attr_accessor :password
+
+  attr_accessible :name,
+                  :email,
+                  :password,
+                  :password_confirmation
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -12,6 +17,23 @@ class User < ActiveRecord::Base
                      :uniqueness  => { :case_sensitive => false }
 
   validates :name ,  :presence => true
+
+  validates :password , :presence => true,
+                        :confirmation => true,
+                        :length => {:within =>  6..20}
+
+
+  before_save :encripted_password
+
+  #private
+
+  def encripted_password
+    self.encripted_password =  do_encript(password)
+  end
+
+  def do_encript(string)
+    string
+  end
 
 
 
