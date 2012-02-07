@@ -1,17 +1,10 @@
-require 'spec_helper'
+require "rspec"
 
-describe UsersController do
-  render_views
+describe "My behaviour" do
 
-  describe "GET 'new'" do
-    it "should be successful" do
-      get 'new'
-      response.should be_success
-    end
+  it "should do something" do
 
-    it "should have the right title" do
-      get 'new'
-      response.should have_selector("title", :content => "Signup")
-    end
+    #To change this template use File | Settings | File Templates.
+    true.should == true
   end
 end
