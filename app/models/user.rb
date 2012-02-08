@@ -1,3 +1,5 @@
+require 'digest'
+
 class User < ActiveRecord::Base
 
   has_many :microposts
@@ -23,18 +25,28 @@ class User < ActiveRecord::Base
                         :length => {:within =>  6..20}
 
 
-  before_save :encripted_password
+  before_save :encript_password
 
-  #private
+  def has_password?(submitted_password)
+    encripted_password == do_encript(password)
+  end
 
-  def encripted_password
+  private
+
+  def encript_password
+    self.salt  = make_salt(password) unless has_password?(password)
     self.encripted_password =  do_encript(password)
   end
 
   def do_encript(string)
-    string
+   secure_hash("#{string}")
   end
 
+  def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
+  end
 
-
+  def make_salt(string)
+    secure_hash("#{Time.now.utc}--#{string}")
+  end
 end

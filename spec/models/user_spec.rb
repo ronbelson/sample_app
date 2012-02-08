@@ -80,7 +80,25 @@ describe User do
       @user.encripted_password.should_not be_blank
     end
 
+    describe "has_password? method"   do
+
+    it "should user response to method? " do
+      @user.should respond_to(:has_password?)
+    end
+
+
+    it "should retrun true if submited password match to encrypted password" do
+      @user.has_password?(@atrr[:pasword]).should be_true
+    end
+
+    it "should retrun false if submited password not match to encrypted password" do
+      @user.has_password?("tg4wdgfsffff").should be_false
+    end
+
+    end
 
   end
+
+
 
 end
