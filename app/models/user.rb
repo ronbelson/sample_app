@@ -28,18 +28,24 @@ class User < ActiveRecord::Base
   before_save :encript_password
 
   def has_password?(submitted_password)
-    encripted_password == do_encript(password)
+    encripted_password == encrypt(submitted_password)
+  end
+
+  def self.authenticate(email,password)
+    user = self.find_by_email(email)
+    return nil if user.nil?
+    return user if user.has_password?(password)
   end
 
   private
 
   def encript_password
     self.salt  = make_salt(password) unless has_password?(password)
-    self.encripted_password =  do_encript(password)
+    self.encripted_password = encrypt(password)
   end
 
-  def do_encript(string)
-   secure_hash("#{string}")
+  def encrypt(string)
+   secure_hash("#{salt}--#{string}")
   end
 
   def secure_hash(string)

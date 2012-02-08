@@ -4,7 +4,6 @@
     <list default="true" id="1a98c7e9-4daa-4cde-a9da-a2efaf1c434d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/user_spec.rb" afterPath="$PROJECT_DIR$/spec/models/user_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webrat.log" afterPath="$PROJECT_DIR$/webrat.log" />
     </list>
@@ -32,7 +31,7 @@
       <file leaf-file-name="user_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/models/user_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="4" selection-start="2608" selection-end="2608" vertical-scroll-proportion="0.0">
+            <state line="102" column="9" selection-start="2726" selection-end="2726" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -41,7 +40,7 @@
       <file leaf-file-name="user.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/user.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="44" selection-start="888" selection-end="888" vertical-scroll-proportion="0.335">
+            <state line="31" column="74" selection-start="815" selection-end="815" vertical-scroll-proportion="0.44">
               <folding />
             </state>
           </provider>
@@ -761,12 +760,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/user_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="4" selection-start="2608" selection-end="2608" vertical-scroll-proportion="0.0" />
+        <state line="102" column="9" selection-start="2726" selection-end="2726" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="44" selection-start="888" selection-end="888" vertical-scroll-proportion="0.335">
+        <state line="31" column="74" selection-start="815" selection-end="815" vertical-scroll-proportion="0.44">
           <folding />
         </state>
       </provider>

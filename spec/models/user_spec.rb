@@ -5,8 +5,8 @@ describe User do
   before (:each) do
     @atrr = { :name => 'ron belson',
               :email => 'ronbelson@gmail.com',
-              :password => "121212",
-              :password_confirmation => "121212"}
+              :password => '121212',
+              :password_confirmation => '121212'}
   end
 
   it "should create new user object instance" do
@@ -82,23 +82,33 @@ describe User do
 
     describe "has_password? method"   do
 
-    it "should user response to method? " do
-      @user.should respond_to(:has_password?)
-    end
+      it "should user response to method? " do
+        @user.should respond_to(:has_password?)
+      end
 
 
-    it "should retrun true if submited password match to encrypted password" do
-      @user.has_password?(@atrr[:pasword]).should be_true
+      it "should retrun true if submited password match to encrypted password" do
+        @user.has_password?(@atrr[:password]).should be_true
+      end
+
+      it "should retrun false if submited password not match to encrypted password" do
+        @user.has_password?('invalid').should be_false
+      end
+
     end
 
-    it "should retrun false if submited password not match to encrypted password" do
-      @user.has_password?("tg4wdgfsffff").should be_false
-    end
+    describe "authenticate method"   do
+
+      it "should return user object" do
+        User.authenticate(@atrr[:email],@atrr[:password]) == @user
+      end
+
+       it "should return false" do
+        User.authenticate(@atrr[:email],"invalid").should be_nil
+      end
 
     end
 
   end
-
-
 
 end
