@@ -1,10 +1,30 @@
 require "rspec"
 
-describe "My behaviour" do
+describe UsersController do
+  render_views
 
-  it "should do something" do
-
-    #To change this template use File | Settings | File Templates.
-    true.should == true
+  before (:each) do
+   @user = Factory(:user)
   end
+
+  describe "GET 'show'" do
+
+     it "should be seccessful" do
+       get :show , :id => @user.id
+       response.should be_success
+     end
+
+     it "should have user gravatar img" do
+       get :show, :id => @user.id
+       response.should have_selector("h1>img" , :class => "gravatar")
+     end
+
+     it "should have user name" do
+       get :show, :id => @user.id
+       response.should have_selector("h1", :content => @user.name)
+     end
+  end
+
+
+
 end

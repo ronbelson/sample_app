@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.1'
 gem 'jquery-rails'
-
+gem 'gravatar_image_tag', '1.0.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,6 +22,7 @@ group :test do
   gem 'rspec-rails', '2.8.0'
   gem 'webrat', '0.7.1'
   gem 'spork', '0.9.0'
+  gem "factory_girl_rails", "~> 1.6.0"
 end
 
 group :production do
