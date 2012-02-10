@@ -58,12 +58,15 @@ describe UsersController do
         end.should_not change(User, :count)  
      end
      
-   end
+   end 
    
    describe "User create" do
+     before(:each) do
+       @new_user =  {:name => "ron belson", :email => "ron@gmail.com", :password => "121212", :password_confirmation => "121212"}
+      end
      it "should create new user" do
        lambda do
-         post :create, :user => Factory(:user)
+         post :create, :user => @new_user #Factory(:user)
        end.should change(User, :count)    
      end   
      

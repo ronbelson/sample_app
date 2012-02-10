@@ -42,10 +42,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    @user.save
-    @title = "Signup" 
-    render action: "new" 
-    #format.json { render json: @user }
+    if @user.save
+      redirect_to @user
+    else
+      @title = "Signup" 
+      render action: "new" 
+      #format.json { render json: @user }
+    end
   end
 
   # PUT /users/1
