@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe User do
-
+  
   before (:each) do
     @atrr = { :name => 'ron belson',
               :email => 'ronbelson@gmail.com',
@@ -12,12 +12,12 @@ describe User do
   it "should create new user object instance" do
     User.create!(@atrr)
   end
-
+ 
   it "should requrie a name" do
     no_name_user = User.new(@atrr.merge(:name => ""))
     no_name_user.should_not be_valid
   end
-
+    
   it "should requrie a email" do
     no_name_user = User.new(@atrr.merge(:email => ""))
     no_name_user.should_not be_valid
