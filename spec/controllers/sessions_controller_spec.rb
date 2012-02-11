@@ -16,4 +16,21 @@ describe SessionsController do
 
    end
 
+   describe "POST 'create'" do
+     
+     before(:each) do
+       @user = {:email => "", :password => ""}
+     end
+     
+     it "should return failuer" do
+       post :create, :session => @user
+       response.should render_template(:new)
+     end
+     
+     it "should have an arr message" do
+       post :create, :session => @user
+       flash.now[:error].should =~ /invalid/i
+     end
+   end
+
 end
