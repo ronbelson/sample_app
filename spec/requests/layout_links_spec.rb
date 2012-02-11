@@ -33,6 +33,10 @@ describe "LayoutLinks" do
     click_link "Contact"
     response.should have_selector('title', :content => 'Contact')
 
-
+  end
+  
+  it "should have a signin page at '/signin'" do
+    get '/signin'
+    response.should have_selector('title', :content => "Signin")
   end
 end
