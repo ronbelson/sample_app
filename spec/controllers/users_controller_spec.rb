@@ -67,9 +67,18 @@ describe UsersController do
      it "should create new user" do
        lambda do
          post :create, :user => @new_user #Factory(:user)
-       end.should change(User, :count)    
+       end.should change(User, :count).by(1)    
      end   
      
+     it "should redirect to user page" do
+        post :create, :user => @new_user
+        response.should redirect_to(user_path(assigns(:user)))
+     end
+     
+     it "should redirect to user page with flash success" do
+       post :create, :user => @new_user
+       flash[:success].should =~ /welcome to sample app/i
+     end
    end   
    
  end   
