@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   private
 
   def encript_password
-    self.salt  = make_salt(password) unless has_password?(password)
+    self.salt  = make_salt(password) if self.new_record?
     self.encripted_password = encrypt(password)
   end
 

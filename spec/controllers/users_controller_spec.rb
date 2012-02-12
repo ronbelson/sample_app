@@ -85,8 +85,25 @@ describe UsersController do
          post :create, :user => @new_user
         controller.should be_signed_in
       end
-   end   
-   
+   end  
  end   
 
+ describe "GET 'edit'"  do
+   before(:each) do
+    # @user = Factory(:user)
+     test_sign_in(@user)
+   end
+   
+   it "should should be success" do
+     get :edit, :id => @user
+     response.should be_success
+   end
+   
+    it "should have title 'edit user'" do
+      get :edit, :id => @user
+      response.should have_selector('title', :content => 'Edit User')
+    end   
+ end
+ 
+ describe "PUT 'update"
 end

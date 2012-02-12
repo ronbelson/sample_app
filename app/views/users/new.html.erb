@@ -1,14 +1,5 @@
 <h1>Signup</h1>
-
 <%= form_for @user  do |u| %>
-  <%= render 'shared/form_errors'%>
-  <div><%= u.label :name%></div>
-  <div><%= u.text_field :name%></div>
-  <div><%= u.label :email%></div>
-  <div><%= u.text_field :email%></div>
-  <div><%= u.label :password%></div>
-  <div><%= u.password_field :password%></div>
-  <div><%= u.label :password_confirmation, :content => "Repeat" %></div>
-  <div><%= u.password_field :password_confirmation %></div>
-  <div><%= u.submit  "Signup" %></div>
+<%= render 'form', :u => u %>
+<div><%= u.submit  "Signup" %></div>
 <% end %>
