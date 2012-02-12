@@ -58,6 +58,7 @@ describe UsersController do
         end.should_not change(User, :count)  
      end
      
+     
    end 
    
    describe "User create" do
@@ -79,6 +80,11 @@ describe UsersController do
        post :create, :user => @new_user
        flash[:success].should =~ /welcome to sample app/i
      end
+     
+      it "should sign the user in" do
+         post :create, :user => @new_user
+        controller.should be_signed_in
+      end
    end   
    
  end   

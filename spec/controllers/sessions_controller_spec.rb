@@ -3,6 +3,17 @@ require 'spec_helper'
 describe SessionsController do
   render_views
   
+   describe "DELETE 'destroy'" do
+
+   it "should sign a user out" do
+     test_sign_in(Factory(:user))
+     delete :destroy
+     controller.should_not be_signed_in
+     response.should redirect_to(root_path)
+   end
+ end
+     
+  
   describe "GET 'new'" do
      it "shhould have title Signin" do
        get :new
@@ -34,19 +45,31 @@ describe SessionsController do
      
      describe "POST 'success'" do
        before(:each) do
-        @user_signin = {:email => "ron@belson.com" , :password => "121212"}
         @user_factory = Factory(:user)
+        @user_signin = {:email => @user_factory.email , :password => @user_factory.password }
        end
-       
+       it "should redirect to user profile page" do
+          post :create, :session =>  @user_signin
+          response.should redirect_to(user_path(@user_factory))
+        end
+        
        it "should signin user" do
          post :create, :session =>  @user_signin
          controller.should be_signed_in
        end
        
-       it "should redirect to user profile page" do
-         post :create, :session =>  @user_signin
-         response.should redirect_to(user_path(@user_factory))
-       end
+       it "should sign the user in" do
+               post :create, :session => @user_signin
+               controller.current_user.should == @user_factory
+               controller.should be_signed_in
+             end
+
+        it "should redirect to the user show page" do
+            post :create, :session => @user_signin
+            response.should redirect_to(user_path(@user_factory))
+        end
+
+       
      end
      
    end
