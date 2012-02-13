@@ -9,6 +9,8 @@ describe User do
               :password_confirmation => '121212'}
   end
 
+
+  
   it "should create new user object instance" do
     User.create!(@atrr)
   end

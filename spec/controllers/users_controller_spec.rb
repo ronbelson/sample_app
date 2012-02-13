@@ -105,5 +105,50 @@ describe UsersController do
     end   
  end
  
- describe "PUT 'update"
+ 
+ describe "PUT 'update' fail" do
+
+    before (:each) do
+       test_sign_in(@user)
+       @update_atrr = { :name => '',
+                          :email => 'l.com',
+                          :password => '',
+                          :password_confirmation => '121212'}
+    end
+    it "shlould render edit page" do
+      put :update, :id => @user, :user => @update_atrr
+      should render_template(:edit)
+    end
+     it "shlould have selector error" do
+        put :update, :id => @user, :user => @update_atrr
+        response.should have_selector('title', :content => 'Edit User')
+      end
+ end
+  
+ describe "PUT 'update' successful" do
+   
+   before (:each) do
+      test_sign_in(@user)
+      @update_atrr = { :name => 'ronron',
+                         :email => 'ronron@gmail.com',
+                         :password => '121212',
+                         :password_confirmation => '121212'}
+   end
+  
+    it "should user change attribute" do
+       put :update, :id => @user, :user => @update_atrr
+       @user.reload
+       @user.email.should == @update_atrr[:email]
+    end
+    
+    it "should user redirect to user page attribute" do
+       put :update, :id => @user, :user => @update_atrr
+       response.should redirect_to(user_path(assigns(@user)))
+    end
+    
+    it "should have a flash message" do
+       put :update, :id => @user, :user => @update_atrr
+       flash[:success].should =~ /successfully updated/
+     end
+ end
 end

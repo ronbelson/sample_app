@@ -60,4 +60,36 @@ describe "Users" do
       end
     end
    end
+   
+   describe "update" do
+     it "should faill" do
+        user = Factory(:user)
+         visit signin_path
+         fill_in :email,    :with => user.email
+         fill_in :password, :with => user.password
+         click_button
+         visit edit_user_path(user)
+         fill_in :email,    :with => ""
+         fill_in :name, :with => ""
+         fill_in :password,    :with => ""
+         click_button
+         response.should render_template('users/edit')
+     end
+     
+     it "should succssesful" do
+         user = Factory(:user)
+          visit signin_path
+          fill_in :email,    :with => user.email
+          fill_in :password, :with => user.password
+          click_button
+          visit edit_user_path(user)
+          fill_in :email,    :with => "roron@gmail.com"
+          fill_in :name, :with => "ronron"
+          fill_in :password,    :with => "131313"
+          fill_in "password confirmation", :with => "131313"
+          click_button 
+          response.should render_template('users/show')
+          response.should have_selector('div.success', :content => "successfully updated")
+      end
+   end
 end
