@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  
+  before_filter  :authentication,  :only => [:edit , :show , :update]
+  before_filter  :correct_user,  :only => [:edit , :update]
+  
   # GET /users
   # GET /users.json
   def index
@@ -12,9 +16,9 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show
+  def show 
     @user = User.find(params[:id])
-
+    @title = @user.name
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -78,4 +82,24 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def authentication
+    deny_access(signin_path, "Please Signin") unless signed_in?
+  end 
+  
+  def correct_user
+     deny_access(root_path ,nil) unless correct_user?
+  end 
+  
+   def correct_user?
+    user =  User.find(params[:id]) 
+    current_user?(user)
+   end
+  
 end
+
+
+
+
+
+

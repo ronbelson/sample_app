@@ -8,8 +8,11 @@ describe UsersController do
   end
 
   describe "GET 'show'" do
-
+    before(:each) do
+       test_sign_in(@user)
+    end
      it "should be seccessful" do
+      
        get :show , :id => @user.id
        response.should be_success
      end
@@ -151,4 +154,18 @@ describe UsersController do
        flash[:success].should =~ /successfully updated/
      end
  end
+ 
+ describe "User authenticated "
+   it"Should redirect to signin page of user not authenticate" do
+     get :show, :id => @user
+     response.should redirect_to(signin_path)
+   end
+   
+   it "Should redirect to home page is the corrent user edit ather user" do
+      test_sign_in(@user)
+      @another_user = Factory(:user, :email => 'roron@roron.com')
+      get :edit, :id => @another_user
+      response.should redirect_to(root_path) 
+   end
+   
 end

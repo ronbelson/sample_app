@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to root_path unless !signed_in?
     @title = "Signin"
   end
   
@@ -13,7 +14,8 @@ class SessionsController < ApplicationController
    else
      sign_in user
      flash[:success] = "welcome to sample app"
-     redirect_to user
+     redirect_to  cookies[:come_from] || user_path(user)
+     cookies[:come_from] = nil  
    end
   end
   
@@ -21,4 +23,8 @@ class SessionsController < ApplicationController
      sign_out 
      redirect_to root_path
   end
+  
+  private 
+  
+  
 end

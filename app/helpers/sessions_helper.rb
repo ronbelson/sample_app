@@ -11,7 +11,8 @@ module SessionsHelper
   
   def current_user
     @current_user ||= user_from_remember_cookies
-  end
+  end 
+  
   
   def signed_in?
     !current_user.nil?
@@ -21,6 +22,16 @@ module SessionsHelper
     cookies.delete(:remember_token)
     self.current_user = nil
   end
+  
+  def current_user?(user)
+    current_user == user
+  end
+  def deny_access(path = signin_path, flash_text)
+     cookies[:come_from] = request.fullpath 
+     flash[:notice] = flash_text unless flash_text.nil?
+     redirect_to path 
+  end
+  
   
   private
   
