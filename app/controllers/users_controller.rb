@@ -10,6 +10,9 @@ class UsersController < ApplicationController
     @title = "Users List"
     
     if params[:q] 
+      if params[:page] == "1"
+        flash[:notice] = "search results for #{params[:q]}"
+      end
       @users = User.paginate(:conditions => ['email = ?', "#{params[:q]}"], :page => params[:page])
     else
       @users =  User.paginate(:page => params[:page])
