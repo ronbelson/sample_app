@@ -1,4 +1,15 @@
 <h1>All users</h1>
+
+<div class="">
+	 
+	<%=  form_tag( :users, :method => "get", :class => "nifty_form") do %>
+	 
+	  <%= label_tag(:q, "find user by email:") %>
+	  <%= text_field_tag(:q) %>
+	  <%= submit_tag("Search") %>
+	<% end %>
+	<br/>
+</div>
 <%= will_paginate %>
 <ul class="users">
   <%=render @users%> 

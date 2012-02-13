@@ -8,7 +8,13 @@ class UsersController < ApplicationController
   # GET /useres/
   def index
     @title = "Users List"
-    @users = User.paginate(:page => params[:page])
+    
+    if params[:q] 
+      @users = User.paginate(:conditions => ['email = ?', "#{params[:q]}"], :page => params[:page])
+    else
+      @users =  User.paginate(:page => params[:page])
+    end
+    
   end
    
   # GET /users/1
