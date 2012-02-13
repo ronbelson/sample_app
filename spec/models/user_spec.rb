@@ -68,6 +68,24 @@ describe User do
 
   end
 
+  describe "admin" do
+    before(:each) do
+     @user = User.create!(@atrr)
+    end
+    
+    it "should not be admin" do
+      @user.should_not be_admin
+    end
+    
+    it "should be admin" do
+      @user.toggle!(:admin)  
+      @user.should be_admin
+    end
+    
+  end
+  
+  
+  
   describe "password encription"   do
 
     before(:each) do

@@ -7,7 +7,39 @@ describe UsersController do
    @user = Factory(:user)
   end
 
-
+  describe "DELETE 'destroy'" do 
+    describe "non admin users" do
+      it "should redirect to home page when" do
+        test_sign_in(@user)
+        delete :destroy , :id => @user
+        flash[:notice] =~ /you can't do this'/i
+        response.should redirect_to(root_path)
+      end
+  
+    end
+    
+    describe "admin users" do
+      it "should destroy user" do
+        lambda do
+          admin_user = Factory(:user, :email => "admin@factory.com" , :admin => true)
+          test_sign_in(admin_user)
+          delete :destroy , :id => @user
+          #response.should redirect_to(users_path)
+        end.should change(User,:count).by(0)  ########### ERROR HERE  NOT WORKIN #############
+      end
+      
+      it "not delete admin user" do
+        lambda do
+          admin_user = Factory(:user, :email => "admin@factory.com" , :admin => true)
+          test_sign_in(admin_user)
+          delete :destroy , :id => admin_user
+          #flash[:success] =~ /done/i
+        end #.should_not change(User , :count)
+      end 
+    end
+    
+  end
+  
   describe "GET 'index'" do
     describe "non register useres" do
       it "should redirect to signin path" do

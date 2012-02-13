@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   
-  before_filter  :authentication,  :only => [:edit , :show , :update , :index ]
-  before_filter  :correct_user,  :only => [:edit , :update]
+  before_filter   :authentication,  :only => [ :edit , :show , :update , :index , :destroy ]
+  before_filter   :correct_user,    :only => [ :edit , :update ]
+   before_filter  :admin_user,    :only => [ :destroy ]
   
    
   # GET /useres/
@@ -68,15 +69,11 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+    @user.destroy unless  delete_admin_user?(@user) #don't destroy admin user it self
+    flash[:success] = "done"  
+    redirect_to users_path
   end
   
   def authentication
@@ -91,7 +88,15 @@ class UsersController < ApplicationController
     user =  User.find(params[:id]) 
     current_user?(user)
    end
-  
+   
+  def admin_user
+    user = User.find(params[:id]) 
+    redirect_to(root_path) unless current_user.admin?
+  end
+   
+   def delete_admin_user?(user)
+    current_user == user
+   end
 end
 
 

@@ -4,6 +4,7 @@ gem 'rails', '3.2.1'
 gem 'jquery-rails'
 gem 'gravatar_image_tag', '1.0.0'
 gem 'will_paginate', '3.0.3'
+gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -30,7 +31,7 @@ end
 group :production do
  gem 'thin'
  gem 'pg'
- gem 'faker', '0.3.1'
+  
 end
 
 # To use ActiveModel has_secure_password
