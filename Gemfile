@@ -31,6 +31,7 @@ end
 group :production do
  gem 'thin'
  gem 'pg'
+ gem 'faker', '0.3.1'
   
 end
 
