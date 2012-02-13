@@ -30,6 +30,7 @@ end
 group :production do
  gem 'thin'
  gem 'pg'
+ gem 'faker', '0.3.1'
 end
 
 # To use ActiveModel has_secure_password
