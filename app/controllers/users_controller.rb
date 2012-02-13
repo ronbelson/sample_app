@@ -1,19 +1,15 @@
 class UsersController < ApplicationController
   
-  before_filter  :authentication,  :only => [:edit , :show , :update]
+  before_filter  :authentication,  :only => [:edit , :show , :update , :index ]
   before_filter  :correct_user,  :only => [:edit , :update]
   
-  # GET /users
-  # GET /users.json
+   
+  # GET /useres/
   def index
-    @users = User.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+    @title = "Users List"
+    @users = User.paginate(:page => params[:page])
   end
-
+   
   # GET /users/1
   # GET /users/1.json
   def show 
@@ -84,11 +80,11 @@ class UsersController < ApplicationController
   end
   
   def authentication
-    deny_access(signin_path, "Please Signin") unless signed_in?
+    deny_access( :flash_text => "Please Signin" , :path => signin_path) unless signed_in?
   end 
   
   def correct_user
-     deny_access(root_path ,nil) unless correct_user?
+     deny_access( :path => root_path) unless correct_user?
   end 
   
    def correct_user?

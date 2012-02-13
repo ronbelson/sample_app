@@ -7,6 +7,27 @@ describe UsersController do
    @user = Factory(:user)
   end
 
+
+  describe "GET 'index'" do
+    describe "non register useres" do
+      it "should redirect to signin path" do
+        get :index
+        response.should redirect_to(signin_path)
+      end
+    end
+    
+    describe "registers users" do
+     before(:each) do
+         test_sign_in(@user)
+      end
+      it "should have title" do
+        get :index, :id => @user
+        response.should have_selector('title', :content => 'Users List')      
+      end
+    end
+    
+  end
+  
   describe "GET 'show'" do
     before(:each) do
        test_sign_in(@user)

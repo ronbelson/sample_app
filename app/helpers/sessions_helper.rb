@@ -26,10 +26,11 @@ module SessionsHelper
   def current_user?(user)
     current_user == user
   end
-  def deny_access(path = signin_path, flash_text)
+  
+  def deny_access(options = { :path => signin_path ,  :flash_text => nil })
      cookies[:come_from] = request.fullpath 
-     flash[:notice] = flash_text unless flash_text.nil?
-     redirect_to path 
+     flash[:notice] = options[:flash_text] unless options[:flash_text].nil?
+     redirect_to(options[:path])
   end
   
   
