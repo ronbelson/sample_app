@@ -2,8 +2,7 @@ class UsersController < ApplicationController
   
   before_filter   :authentication,  :only => [ :edit , :show , :update , :index , :destroy ]
   before_filter   :correct_user,    :only => [ :edit , :update ]
-   before_filter  :admin_user,    :only => [ :destroy ]
-  
+  before_filter   :admin_user,    :only => [ :destroy ]
    
   # GET /useres/
   def index
