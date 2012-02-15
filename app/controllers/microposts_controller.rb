@@ -25,7 +25,9 @@ class MicropostsController < ApplicationController
    private
    
    def micropost_belong_to_user 
-      redirect_to root_path unless current_user.microposts.find_by_id(params[:id]).nil?
+      @micropost = Micropost.find_by_id(params[:id])
+      redirect_to user_path(current_user) , :flash => { :notice => "can't delete your friend feed" } unless current_user?(@micropost.user) 
+      
    end
          
 end
