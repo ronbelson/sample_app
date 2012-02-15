@@ -24,8 +24,8 @@ describe MicropostsController do
       @micropost = Factory(:micropost, :user => @user)
       annother_user = Factory(:user, :email => "new@new.com")
       test_sign_in(annother_user)
-      # delete :destroy, :id => @micropost
-      # response.should redirect_to(root_path) 
+      delete :destroy, :id => @micropost
+      response.should redirect_to(user_path(annother_user)) 
      end
    end
    

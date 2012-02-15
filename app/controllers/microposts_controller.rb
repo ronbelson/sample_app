@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   
   before_filter   :authentication,  :only => [:create , :destroy] #functoion on session_helper 
-  before_filter  :micropost_belong_to_user,    :only => [:destroy ]
+  before_filter   :micropost_belong_to_user,    :only => [:destroy ]
    
    def create
      @micropost = current_user.microposts.build(params[:micropost])
@@ -12,11 +12,12 @@ class MicropostsController < ApplicationController
        @feed_items = []
      end
      
-      
       redirect_to current_user
+      
    end
   
    def destroy
+     @micropost = Micropost.find(params[:id])
      @micropost.destroy
      redirect_to user_path(current_user) , :flash => {:success =>  "done" } 
    end
