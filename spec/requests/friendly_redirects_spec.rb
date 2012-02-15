@@ -20,6 +20,6 @@ describe "FriendlyRedirects" do
     click_button
     @another_user_attr = Factory(:user, :email =>'ron@wwm.com')
      visit edit_user_path(@another_user_attr)
-     response.should have_selector('title', :content => 'Home')  
+     response.should have_selector('title', :content => @user.name )  #User profile 
   end
 end

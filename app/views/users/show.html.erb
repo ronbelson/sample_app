@@ -5,10 +5,17 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <%= render 'microposts/form'  %>
+	  <% unless @user.microposts.empty? %>
+	       <table class="microposts" summary="User microposts">
+          <%= render @microposts %>
+        </table>
+        <%= will_paginate @microposts %>
+      <% end %>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_url(@user), @user %>
+      <strong>Name</strong> <%= link_to @user.name, @user %><br />
+      <strong>Microposts</strong><% if @user.microposts.empty?  %>not yet<% else %> <%= @user.microposts.count %>  <% end %>
     </td>
   </tr>
 </table>

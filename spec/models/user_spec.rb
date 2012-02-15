@@ -9,7 +9,12 @@ describe User do
               :password_confirmation => '121212'}
   end
 
-
+   describe  "micropost associations" do
+    it "should have many micropsts" do
+      @user = User.create!(@atrr)
+      @user.should respond_to(:microposts)
+    end
+   end
   
   it "should create new user object instance" do
     User.create!(@atrr)

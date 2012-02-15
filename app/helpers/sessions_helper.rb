@@ -1,5 +1,9 @@
 module SessionsHelper
   
+  def authentication
+    deny_access( :flash_text => "Please Signin" , :path => signin_path) unless signed_in?
+  end
+  
   def sign_in(user)
     cookies.permanent.signed[:remember_token] = [user.id, user.salt]
     self.current_user = user

@@ -5,5 +5,7 @@ module ApplicationHelper
      "Ruby on Rails Tutorial Sample App | " + @title
     end
   end
+  
+  
 
 end

@@ -23,7 +23,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show 
     @user = User.find(params[:id])
+    @micropost = Micropost.new
     @title = @user.name
+    @microposts = @user.microposts.paginate(:page => params[:page])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -83,10 +85,6 @@ class UsersController < ApplicationController
     flash[:success] = "done"  
     redirect_to users_path
   end
-  
-  def authentication
-    deny_access( :flash_text => "Please Signin" , :path => signin_path) unless signed_in?
-  end 
   
   def correct_user
      deny_access( :path => root_path) unless correct_user?

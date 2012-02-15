@@ -4,3 +4,8 @@ Factory.define :user do |user|
   user.password              "121212"
   user.password_confirmation "121212"
 end
+
+Factory.define :micropost do |micropost|
+  micropost.content         "content"
+  micropost.association      :user
+end
