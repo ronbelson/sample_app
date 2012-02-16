@@ -18,7 +18,7 @@ describe UsersController do
   
     end
     
-    describe "admin users" do
+    describe "admin users" do 
       it "should destroy user" do
         lambda do
           admin_user = Factory(:user, :email => "admin@factory.com" , :admin => true)

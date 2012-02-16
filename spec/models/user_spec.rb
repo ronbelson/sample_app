@@ -141,7 +141,7 @@ describe User do
     
   end
   
-  
+   
   
   describe "password encription"   do
 
