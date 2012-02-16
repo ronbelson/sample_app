@@ -17,7 +17,7 @@ class MicropostsController < ApplicationController
    end
   
    def destroy
-     @micropost = Micropost.find(params[:id])
+     # @micropost = Micropost.find(params[:id])
      @micropost.destroy
      redirect_to user_path(current_user) , :flash => {:success =>  "done" } 
    end
@@ -25,9 +25,8 @@ class MicropostsController < ApplicationController
    private
    
    def micropost_belong_to_user 
-      @micropost = Micropost.find_by_id(params[:id])
-      redirect_to user_path(current_user) , :flash => { :notice => "can't delete your friend feed" } unless current_user?(@micropost.user) 
-      
+      @micropost = current_user.microposts.find_by_id(params[:id])
+      redirect_to user_path(current_user) if @micropost.nil?
    end
          
 end
