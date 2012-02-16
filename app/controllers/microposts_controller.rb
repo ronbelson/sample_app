@@ -9,10 +9,9 @@ class MicropostsController < ApplicationController
        flash[:success] = "done!"
      else
        flash[:error] = "somthing wrong"
-       @feed_items = []
      end
      
-      redirect_to current_user
+      redirect_to root_path
       
    end
   

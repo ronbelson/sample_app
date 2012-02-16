@@ -3,6 +3,16 @@ require 'digest'
 class User < ActiveRecord::Base
 
   has_many :microposts , :dependent => :destroy
+  
+  has_many :relationships, :dependent => :destroy,
+                            :foreign_key => "follower_id"
+  has_many :reverse_relationships, :dependent => :destroy,
+                                    :foreign_key => "followed_id",
+                                    :class_name => "Relationship"
+  has_many :following, :through => :relationships, :source => :followed
+  has_many :followers, :through => :reverse_relationships,
+                        :source  => :follower
+  
 
   attr_accessor :password
 
@@ -42,6 +52,20 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
   
+   
+  
+  def following?(followed)
+     relationships.find_by_followed_id(followed)
+   end
+
+   def follow!(followed)
+     relationships.create!(:followed_id => followed.id)
+   end
+    
+   def unfollow!(followed)
+       relationships.find_by_followed_id(followed).destroy
+   end
+   
   private
 
   def encript_password
@@ -60,4 +84,8 @@ class User < ActiveRecord::Base
   def make_salt(string)
     secure_hash("#{Time.now.utc}--#{string}")
   end
+  
+ 
+  
+  
 end
