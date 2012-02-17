@@ -1,0 +1,6 @@
+<%
+@microposts = current_user.microposts.first
+%>
+$("#microposts").prepend("<%= escape_javascript(render @microposts) %>")
+$("#microposts_count").html("<%= (current_user.microposts.count) %>")
+$("#micropost_content").val("")

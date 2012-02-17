@@ -1,5 +1,5 @@
-<%= form_for @micropost  do |m| %>
+<%= form_for (@micropost) , :remote => true do |m| %>
   <%= render 'shared/form_errors', :object => m.object %>
   <div><br/>What new? <%= m.text_area :content %></div>
-  <div><%= m.submit  "add" %></div>
+  <div><%= m.submit  "add" , :onclick => "   if ( $('#micropost_content').val() =='')  return false " %></div>
  <% end%>
