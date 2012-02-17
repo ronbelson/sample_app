@@ -8,12 +8,10 @@
       </h1>
       <%= render '/users/follow_form' if signed_in? %>
       <%= render 'microposts/form'  %>
-	  <% unless @user.microposts.empty? %>
 	     <table id="microposts" class="microposts" summary="User microposts">
           <%= render @microposts %>
         </table>
         <%= will_paginate @microposts %>
-      <% end %>
     </td>
     <td class="sidebar round">
       <strong>Name</strong> <%= link_to @user.name, @user %><br />

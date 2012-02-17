@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = "welcome to sample app"
-      redirect_to @user 
+      redirect_to cookies[:come_from] || user_path(@user)
     else
       @title = "Signup" 
       render action: "new" 
