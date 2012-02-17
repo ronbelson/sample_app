@@ -52,7 +52,9 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
   
-   
+   def feed
+     Micropost.from_users_followed_by(self)
+   end
   
   def following?(followed)
      relationships.find_by_followed_id(followed)

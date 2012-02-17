@@ -3,11 +3,11 @@
 	<table>
 		<tr>
 			<td>
-				<a href="<%= following_user_path(current_user) %>"><%= @user.following.count  %> followed</a>
+				<a href="<%= following_user_path(@user) %>"><%= @user.following.count  %> followed</a>
 			</td>
 			<td>
 				<div id="followers">
-				<a href="<%= followers_user_path(current_user) %>"><%= @user.followers.count %> followers</a>
+				<a href="<%= followers_user_path(@user) %>"><%= @user.followers.count %> followers</a>
 				<div>
 			</td>
 		</tr>

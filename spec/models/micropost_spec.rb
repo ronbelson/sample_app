@@ -42,6 +42,22 @@ describe Micropost do
       #         mc3 =  Factory(:micropost , :content  => "222" , :user => @another_user , :created_at => 11.year.ago)
       #         @user.microposts.
       #       end
+      
+      it "should have user and followed user feeds only"  do
+        u1 = Factory(:user , :email => "u1@u.com")
+        u2 = Factory(:user , :email => "u2@u.com")
+        u3 = Factory(:user , :email => "u3@u.com")                
+        
+        u1.follow!(u2)
+        
+        mc1 =  Factory(:micropost , :content  => "111" , :user => u1 , :created_at => 1.years.ago)
+        mc2 =  Factory(:micropost , :content  => "222" , :user => u2 , :created_at => 11.year.ago)
+        mc3 =  Factory(:micropost , :content  => "222" , :user => u3 , :created_at => 11.year.ago)        
+        
+        u1.feed.should include(mc1)
+        u1.feed.should include(mc2)        
+        u1.feed.should_not include(mc3)
+      end
   end
   
   describe " Validation Matchers" do

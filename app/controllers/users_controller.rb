@@ -77,6 +77,34 @@ class UsersController < ApplicationController
       render action: "edit" 
     end
   end
+  
+  def followers
+     @title = "Followers users"
+     @user =  User.find_by_id(params[:id])
+      if params[:q] 
+        if params[:page] == "1"
+          flash[:notice] = "search results for #{params[:q]}"
+        end
+        @users = @user.followers.paginate(:conditions => ['email = ?', "#{params[:q]}"], :page => params[:page])
+      else
+        @users = @user.followers.paginate(:page => params[:page])
+      end
+      render 'index'
+  end
+  
+  def following
+     @user =  User.find_by_id(params[:id])
+     @title = "Following users"
+      if params[:q] 
+        if params[:page] == "1"
+          flash[:notice] = "search results for #{params[:q]}"
+        end
+        @users =  @user.following.paginate(:conditions => ['email = ?', "#{params[:q]}"], :page => params[:page])
+      else
+        @users =  @user.following.paginate(:page => params[:page])
+      end
+      render 'index'
+  end
 
   # DELETE /users/1
   def destroy

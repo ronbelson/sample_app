@@ -22,11 +22,10 @@ class PagesController < ApplicationController
   def home_page
     @title = "Home"
     if signed_in?
-       # redirect_to(user_path(current_user))
        @user = current_user
        @micropost = Micropost.new
        @title = @user.name
-       @microposts = @user.microposts.paginate(:page => params[:page])
+       @microposts = @user.feed.paginate(:page => params[:page])
        render "users/show"
     else
       render "pages/home"
