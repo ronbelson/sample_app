@@ -16,11 +16,11 @@ describe Notifier do
   end
   
   describe "welcome" do
-    let(:mail) { Notifier.welcome('ron') }
+    let(:mail) { Notifier.welcome("ron","fofo@gmail.com") }
 
     it "renders the headers" do
       mail.subject.should eq("ron, welcome to sampleapp")
-      mail.to.should eq(["ronibelson@gmail.com"])
+      mail.to.should eq(["fofo@gmail.com"])
       mail.from.should eq(["ronbelson@gmail.com"])
     end
 

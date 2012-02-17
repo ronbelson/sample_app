@@ -14,10 +14,10 @@ class Notifier < ActionMailer::Base
          from: "ronbelson@gmail.com"
   end
   
-  def welcome(name)
+  def welcome(name, email)
     @greeting = "Hi #{name},"
 
-    mail to: "ronibelson@gmail.com",
+    mail to: email,
          subject: "#{name}, welcome to sampleapp",
          from: "ronbelson@gmail.com"
   end

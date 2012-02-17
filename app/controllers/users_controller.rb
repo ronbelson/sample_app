@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save      
       sign_in @user
-      Notifier.welcome(@user.name).deliver
+      Notifier.welcome(@user.name, @user.email).deliver
       flash[:success] = "welcome to sample app"
       redirect_to cookies[:come_from] || user_path(@user)
     else
