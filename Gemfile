@@ -5,6 +5,7 @@ gem 'jquery-rails'
 gem 'gravatar_image_tag', '1.0.0'
 gem 'will_paginate', '3.0.3'
 gem 'jquery-rails'
+gem "actionmailer", "3.2.1"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,6 +20,7 @@ group :development do
   gem 'rspec-rails', '2.8.0'
   gem 'annotate', '2.4.0'
   gem 'faker', '0.3.1'
+  gem 'tlsmail', '0.0.1'
 end
 
 group :test do

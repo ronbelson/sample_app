@@ -1,6 +1,31 @@
 SampleApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+    require 'tlsmail'
+       Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+       ActionMailer::Base.delivery_method = :smtp
+       ActionMailer::Base.perform_deliveries = true
+       ActionMailer::Base.raise_delivery_errors = true
+       ActionMailer::Base.smtp_settings = {
+           :address => "smtp.gmail.com",
+           :port => "587",
+           :domain => "gmail.com",
+           :enable_starttls_auto => true,
+           :authentication => :login,
+           :user_name => "ronbelson@gmail.com",
+           :password => "baryromy2009"
+       }
+  
+  # ActionMailer::Base.delivery_method = :smtp
+  #   ActionMailer::Base.smtp_settings = {
+  #     :user_name => "ron",
+  #     :password => "12c8b3f73c4ee914",
+  #     :address => "mailtrap.io",
+  #     :port => 2525,
+  #     :authentication => :plain,
+  #   }
+  
 
+ config.action_mailer.raise_delivery_errors = true
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -13,9 +38,7 @@ SampleApp::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
-
+  
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 

@@ -54,8 +54,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    if @user.save
+    if @user.save      
       sign_in @user
+      Notifier.welcome(@user.name).deliver
       flash[:success] = "welcome to sample app"
       redirect_to cookies[:come_from] || user_path(@user)
     else

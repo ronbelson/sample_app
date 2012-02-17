@@ -49,7 +49,7 @@ describe "Users" do
             lambda do
             visit signup_path
             fill_in "Name",            :with => "ron belson"
-            fill_in "Email",            :with => "ron@belson.com"
+            fill_in "Email",            :with => "ronbod2@belson.com"
             fill_in "Password",            :with => "121212"
             fill_in "Password confirmation",   :with => "121212"
             click_button          
